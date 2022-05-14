@@ -1,0 +1,232 @@
+.embedbutton,
+button:enabled,
+button[enabled] {
+  font: 16px;
+  text-decoration: none;
+  flex-grow: 0.2;
+  height: 1.8rem;
+  min-width: 1.5rem;
+  border: none;
+  border-radius: 0.15rem;
+  background: #2bebd3;
+  background: -webkit-linear-gradient(to bottom right, #20ade9, #22c1e1);
+  background: -moz-linear-gradient(to bottom right, #20ade9, #22c1e1);
+  background: linear-gradient(to bottom right, #20ade9, #22c1e1);
+  margin-left: 0.5rem;
+  box-shadow: inset 0 -0.15rem 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 5px;
+  margin-right: 20px;
+}
+
+.imgclass {
+  max-width: 40px;
+  height: 40px;
+}
+
+.wellsvoice {
+  background-image: url("../images/wellsbackground.jpg");
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.myvocalizer {
+  position: unset !important;
+}
+
+.allfeature {
+  height: 50%;
+  width: 50%;
+  border: black;
+  /* border-style: solid; */
+  margin-left: 10%;
+  padding-top: 8%;
+  padding-left: 10%;
+}
+
+.popupmaindiv
+{
+  border: black;
+  /* border-style: solid; */
+  margin-left: 10%;
+  padding-top: 8%;
+  padding-left: 10%;
+}
+
+.choosefilediv{
+  padding-top: 20px;
+}
+.features {
+  width: fit-content;
+}
+
+.inputclass {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.inputlabel {
+  font-size: 1.1em;
+  color: white;
+  display: inline-block;
+  width: 100px;
+}
+
+.inputdiv {
+  height: 35px;
+}
+.selectdropdown {
+  width: 178px;
+  height: 22px;
+}
+.service-small option {
+  font-size: 14px;
+  padding: 5px;
+  background: #5c5c5c;
+}
+.disable,
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc !important;
+  color: #666666;
+  font: 16px;
+  text-decoration: none;
+  flex-grow: 0.2;
+  height: 1.8rem;
+  min-width: 1.5rem;
+  border: none;
+  border-radius: 0.15rem;
+  margin-left: 0.5rem;
+  box-shadow: inset 0 -0.15rem 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 5px;
+  margin-right: 20px;
+}
+
+.required:after {
+  content: " *";
+  color: red;
+}
+.transcript_word {
+  border: 1px solid hsl(0, 17%, 95%);
+  height: 2.5rem;
+  min-width: 2rem;
+  border: none;
+  border-radius: 0.15rem;
+  margin-left: 0.5rem;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 5px;
+  margin-right: 20px;
+  color: white;
+}
+.labeclass {
+  color: white;
+}
+
+.recordedaudio {
+  padding-top: 3%;
+  padding-bottom: 4%;
+}
+
+.submitrecorddiv{
+  flex-shrink: 0;
+}
+.submitrecord {
+  width: 100px;
+  position: absolute;
+  left:25%
+}
+audio {
+  height: 30px;
+  width: 200Px;
+  padding-left: 0;
+}
+
+.uploadlink {
+  padding-top: 10px;
+}
+
+/* profilehtml css property  */
+
+.linktag {
+  padding-left: 60%;
+  padding-top: 3%;
+  font-size: 20px;
+}
+a:link {
+  padding-left: 20px;
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+.tablehead {
+  width: 25%;
+  border-bottom: #868ca0;
+  border-width: 1px;
+  border-bottom-style: solid;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-family: "Segoe UI Regular", SegoeUI, "Segoe UI";
+  padding: 9px;
+  color: grey;
+}
+
+.profilelist {
+  height: 50%;
+  width: 50%;
+  border: black;
+  /* border-style: solid; */
+  margin-left: 10%;
+  padding-top: 2%;
+  padding-left: 5%;
+}
+
+.phonemsth
+{
+  height: 50px;
+  width: 150px;
+  padding-left: 25px;
+  text-align: start !important;
+}
+.nametd {
+  height: 50px;
+  width: 100px;
+}
+
+.audiotd {
+  height: 50px;
+  width: 100px;
+  padding-left: 25px;
+}
+.phonemstd {
+  height: 50px;
+  width: 150px;
+  padding-left: 25px;
+}
+
+.audioicon {
+  height: 25px !important;
+  width: 180px !important;
+}

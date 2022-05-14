@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/fontawesome.min.css">
+</head>
+
+<body style="overflow: hidden;">
+    <div class="wellsvoice">
+        <div class="popupmaindiv">
+            <h2 class="labeclass">Update Record </h2>
+            <div class="features">
+                <button id="recordButton" class="embedbutton"> <i class="fa fa-microphone" aria-hidden="true"></i>
+                    Record</button>
+                <button id="stopButton" class="embedbutton" disabled="true" style="background: rgb(31, 176, 232); "><i
+                        class="fa fa-microphone-slash" aria-hidden="true"></i>
+                    Stop</button>
+                <br>
+                <div class="labeclass choosefilediv">
+                    <label for="myfile">Select a file:</label>
+                    <input type="file" id="myfile" name="myfile">
+                </div>
+                <div class="recordedaudio">
+                    <ol id="recordingsList"></ol>
+                </div>
+                <div class="submitrecorddiv">
+                    <button type="submit" class="submitrecord" id="submitbtn" value="SumitRecord">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="../jsfile/recorder.js"></script>
+    <script src="../jsfile/recorder_wells.js"></script>
+    <script src="../jsfile/fontawesome.js"></script>
+    <script src="../jsfile/search_wells.js"></script>
+    <script src="../jsfile/jquery.min.js"></script>
+</body>
+
+</html>

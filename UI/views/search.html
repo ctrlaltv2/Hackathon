@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../style/styles.css">
+</head>
+
+<body style="overflow: hidden;">
+    <div class="wellsvoice">
+        <div class="allfeature">
+            <div class="features">
+                <h2 class="labeclass">Search Pronunciation </h2>
+                <form>
+                    <div class="inputdiv">
+                        <label class="inputlabel required labeclass" for="fname">Name:</label>
+                        <input type="text" id="name" name="name" required onkeyup="enableFunction()">
+                    </div>
+                    <div class="inputdiv">
+                        <label class="inputlabel" for="lname" class="labeclass">Country:</label>
+                        <input type="text" id="country" name="country">
+                    </div>
+                    <div class="inputdiv">
+                        <label class="inputlabel" for="fname" class="labeclass">Gender:</label>
+                        <select class="selectdropdown" name="gender" id="gender">
+                            <option class="service-small" value="male">Male</option>
+                            <option class="service-small" value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="inputdiv">
+                        <label class="inputlabel" for="lname" class="labeclass">Language:</label>
+                        <input type="text" id="language" name="language">
+                    </div>
+                    <div>
+                        <button type="button" value="Submit" id="submitbtn" onclick="searchPronunciation()"
+                            disabled>Search</button>
+                    </div>
+                </form>
+            </div>
+            <div id="outputAudio" hidden="true">
+                <audio id="audiotag" controls="" src=""></audio><br><br>
+                <div id="transcript_output">
+                    <label class="inputlabel" for="lname" class="labeclass">Phoneme:</label>
+                    <span id="phonemespan" class="transcript_word"></span><br><br>
+                    <label class="inputlabel" for="lname" class="labeclass">Grapheme:</label>
+                    <span id="graphemespan" class="transcript_word"></span><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../jsfile/recorder.js"></script>
+    <script src="../jsfile/search_wells.js"></script>
+    <script src="../jsfile/jquery.min.js"></script>
+</body>
