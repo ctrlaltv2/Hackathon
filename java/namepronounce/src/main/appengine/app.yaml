@@ -1,4 +1,5 @@
 runtime: java
+service: namepronounce
 instance_class: B4
 env: flex
 runtime_config:
