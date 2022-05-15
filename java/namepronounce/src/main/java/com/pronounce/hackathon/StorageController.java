@@ -106,6 +106,22 @@ class StorageController {
 				.contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(filename)))
 				.body(blob.getContent(BlobSourceOption.generationMatch()));
 	}
+	@GetMapping(value = "/api/likes")
+	public ResponseEntity<PronounceDetails> updateLikesCount(@RequestParam(value = "id", required = true) String id) {
+		List<PronounceDetails> list = pronounceDao.udateLikes(id);
+		if (list != null) {
+			return new ResponseEntity<>(list.get(0), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
+	@GetMapping(value = "/api/dislikes")
+	public ResponseEntity<PronounceDetails> updateDisLikesCount(@RequestParam(value = "id", required = true) String id) {
+		List<PronounceDetails> list = pronounceDao.udateDisLikes(id);
+		if (list != null & !list.isEmpty()) {
+			return new ResponseEntity<>(list.get(0), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
 
 
 	/**

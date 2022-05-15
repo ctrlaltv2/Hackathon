@@ -19,13 +19,15 @@ import org.springframework.stereotype.Repository;
 public class PronounceDaoImpl implements PronounceDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	private final String INSERT_SQL = "INSERT INTO Pronounce(name,gender,country,phoneme,grafeme,language,filename,empid) values (?,?,?,?,?,?,?,?) ";
+	private final String INSERT_SQL = "INSERT INTO Pronounce(name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes) values (?,?,?,?,?,?,?,?,?,?) ";
 	private final String SELECT_SQL_NAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE name=?";
 	private final String SELECT_SQL_NAME_LANG = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE name=? and language=?";
 	private final String SELECT_SQL_ID = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE id=?";
 	private final String SELECT_SQL_FILENAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE filename=?";
 	private final String SELECT_SQL_EMP_ID = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE empid=?";
-
+	
+	private final String UPDATE_LIKES ="UPDATE Pronounce set likes= likes + 1 where id=?";
+	private final String UPDATE_DIS_LIKES ="UPDATE Pronounce set dislikes= dislikes + 1 where id=?";
 	@Override
 	public List<PronounceDetails> findAll() {
 
@@ -48,6 +50,8 @@ public class PronounceDaoImpl implements PronounceDao {
 				ps.setString(6, pronounce.getLanguage());
 				ps.setString(7, pronounce.getFilename());
 				ps.setString(8, pronounce.getEmpid());
+				ps.setString(9,"0");
+				ps.setString(10,"0");
 				return ps;
 			}
 		}, holder);
@@ -72,6 +76,18 @@ public class PronounceDaoImpl implements PronounceDao {
 			return jdbcTemplate.query(SELECT_SQL_FILENAME, new Object[] {filename}, new PronounceRowMapper());
 		}
 		return null;
+	}
+
+	@Override
+	public List<PronounceDetails> udateLikes(String id) {
+		jdbcTemplate.update(UPDATE_LIKES,id);
+		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {id}, new PronounceRowMapper());
+	}
+
+	@Override
+	public List<PronounceDetails> udateDisLikes(String id) {
+		jdbcTemplate.update(UPDATE_DIS_LIKES,id);
+		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {id}, new PronounceRowMapper());
 	}
 
 
