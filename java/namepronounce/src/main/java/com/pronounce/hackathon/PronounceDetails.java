@@ -22,6 +22,9 @@ public class PronounceDetails implements Serializable{
 	private String phoneme;
 	private String  grafeme;
 	private String filename;
+	private String empid;
+	private int likes;
+	private int dislikes;
 	
 	public String getName() {
 		return name;
@@ -70,6 +73,24 @@ public class PronounceDetails implements Serializable{
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	public String getEmpid() {
+		return empid;
+	}
+	public void setEmpid(String empid) {
+		this.empid = empid;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+	public int getDislikes() {
+		return dislikes;
+	}
+	public void setDislikes(int dislikes) {
+		this.dislikes = dislikes;
 	}
 	
 }

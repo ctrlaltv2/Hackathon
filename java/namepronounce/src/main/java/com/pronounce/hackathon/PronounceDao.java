@@ -6,6 +6,6 @@ public interface PronounceDao {
 
 	List<PronounceDetails> findAll();
 	PronounceDetails create(PronounceDetails pronounce);
-	List<PronounceDetails> fetch(String name,String id,String filename,String language);
+	List<PronounceDetails> fetch(String name,String id,String filename,String language,String empid);
 	
 }
