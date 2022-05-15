@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.cloud.storage.Blob;
@@ -35,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@CrossOrigin(origin="*",maxAge=3600)
 class StorageController {
 
 	@Value("${bucketname}")
