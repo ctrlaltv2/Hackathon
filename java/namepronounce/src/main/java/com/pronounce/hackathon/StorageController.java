@@ -77,14 +77,18 @@ class StorageController {
 		String fileNameinGCP = String.valueOf(timestamp) + "_" + pronouceDetails.getName() + "." + extension;
 		pronouceDetails.setFilename(fileNameinGCP);
 		Random rand = new Random();
-		pronouceDetails.setEmpid(String.valueOf(rand.nextInt(9999999)));
 		final BlobId blobId = constructBlobId(bucketName, subdirectory, fileNameinGCP);
 		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
+		
 		storage.create(blobInfo, byteArray);
-		if(pronouceDetails.getId() == null )
+		
+		if(pronouceDetails.getId() == null ) {
+			pronouceDetails.setEmpid(String.valueOf(rand.nextInt(9999999)));
 			pronounceDao.create(pronouceDetails);
-		else
+		}
+		else {
 			pronounceDao.udateProfile(pronouceDetails);
+		}
 
 		return new ResponseEntity<>(pronouceDetails, HttpStatus.OK);
 	}

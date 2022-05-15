@@ -32,7 +32,7 @@ public class PronounceDaoImpl implements PronounceDao {
 	@Override
 	public List<PronounceDetails> findAll() {
 
-		 return jdbcTemplate.query("select * from Pronounce limit 10", new PronounceRowMapper());
+		 return jdbcTemplate.query("select * from Pronounce order by id desc limit 10", new PronounceRowMapper());
 	}
 
 	@Override
