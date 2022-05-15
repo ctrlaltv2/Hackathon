@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.activation.FileTypeMap;
 import javax.annotation.Nullable;
@@ -75,7 +76,8 @@ class StorageController {
 		String extension = filePart.filename().substring(index + 1);
 		String fileNameinGCP = String.valueOf(timestamp) + "_" + pronouceDetails.getName() + "." + extension;
 		pronouceDetails.setFilename(fileNameinGCP);
-
+		Random rand = new Random();
+		pronouceDetails.setEmpid(String.valueOf(rand.nextInt(9999999)));
 		final BlobId blobId = constructBlobId(bucketName, subdirectory, fileNameinGCP);
 		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
 		storage.create(blobInfo, byteArray);
