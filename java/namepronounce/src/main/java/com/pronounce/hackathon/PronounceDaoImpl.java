@@ -28,10 +28,11 @@ public class PronounceDaoImpl implements PronounceDao {
 	
 	private final String UPDATE_LIKES ="UPDATE Pronounce set likes= likes + 1 where id=?";
 	private final String UPDATE_DIS_LIKES ="UPDATE Pronounce set dislikes= dislikes + 1 where id=?";
+	private final String UPDATE ="UPDATE Pronounce set name=?,gender=?,country=?,language=?,filename=?,empid=? where id=?";
 	@Override
 	public List<PronounceDetails> findAll() {
 
-		 return jdbcTemplate.query("select * from Pronounce", new PronounceRowMapper());
+		 return jdbcTemplate.query("select * from Pronounce where empid is not null limit 10", new PronounceRowMapper());
 	}
 
 	@Override
@@ -88,6 +89,12 @@ public class PronounceDaoImpl implements PronounceDao {
 	public List<PronounceDetails> udateDisLikes(String id) {
 		jdbcTemplate.update(UPDATE_DIS_LIKES,id);
 		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {id}, new PronounceRowMapper());
+	}
+
+	@Override
+	public PronounceDetails udateProfile(PronounceDetails obj) {
+		jdbcTemplate.update(UPDATE,obj.getName(),obj.getGender(),obj.getCountry(),obj.getLanguage(),obj.getFilename(),obj.getEmpid(),obj.getId());
+		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {obj.getId()}, new PronounceRowMapper()).get(0);
 	}
 
 

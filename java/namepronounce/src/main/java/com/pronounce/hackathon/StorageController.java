@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -78,7 +79,10 @@ class StorageController {
 		final BlobId blobId = constructBlobId(bucketName, subdirectory, fileNameinGCP);
 		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
 		storage.create(blobInfo, byteArray);
-		pronounceDao.create(pronouceDetails);
+		if(pronouceDetails.getId() == null )
+			pronounceDao.create(pronouceDetails);
+		else
+			pronounceDao.udateProfile(pronouceDetails);
 
 		return new ResponseEntity<>(pronouceDetails, HttpStatus.OK);
 	}
@@ -122,7 +126,23 @@ class StorageController {
 		}
 		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 	}
-
+	
+	@GetMapping(value = "/api/getProfiles")
+	public ResponseEntity<List<PronounceDetails>> getProfile() {
+		List<PronounceDetails> list = pronounceDao.findAll();
+		if (list != null & !list.isEmpty()) {
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
+	@PostMapping(value = "/api/updateProfiles")
+	public ResponseEntity<PronounceDetails> updateProfile(@RequestBody PronounceDetails pronouce) {
+		PronounceDetails obj = pronounceDao.udateProfile(pronouce);
+		if (obj != null ) {
+			return new ResponseEntity<>(obj, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
 
 	/**
 	 * Construct Blob ID
