@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@CrossOrigin(origin="*",maxAge=3600)
+@CrossOrigin(origins="*",maxAge=3600)
 class StorageController {
 
 	@Value("${bucketname}")
