@@ -67,7 +67,7 @@ public class PronounceDaoImpl implements PronounceDao {
 		if(empid != null) {
 			return jdbcTemplate.query(SELECT_SQL_EMP_ID, new Object[] {empid}, new PronounceRowMapper());
 		}else
-		if(name != null && language != null) {
+		if(name != null && language != null && language != "" ) {
 			return jdbcTemplate.query(SELECT_SQL_NAME_LANG, new Object[] {name,language}, new PronounceRowMapper());
 		}else if(name != null) {
 			return jdbcTemplate.query(SELECT_SQL_NAME, new Object[] {name}, new PronounceRowMapper());
