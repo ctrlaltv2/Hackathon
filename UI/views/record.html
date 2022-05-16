@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
     <link rel="stylesheet" href="../style/styles.css">
     <link rel="stylesheet" href="../style/fontawesome.min.css">
 </head>
@@ -9,7 +10,7 @@
     <div class="wellsvoice">
         <div class="allfeature">
             <div class="linktag">
-                <a href="javascript:history.back()">Go back</a>
+                <a href="javascript:history.back()" onclick="pagereload()">Go back</a>
             </div>
             <h2 class="labeclass">Record Pronunciation</h2>
             <div class="features">
@@ -22,7 +23,7 @@
                 <div class="inputclass">
                     <div class="inputdiv">
                         <label class="inputlabel required labeclass" for="fname">Name:</label>
-                        <input type="text" id="name" name="name" required onkeyup="enableFunction()" />
+                        <input type="text" id="name" name="name" required onkeyup="enablerecordFunction()" />
                     </div>
                     <div class="inputdiv">
                         <label class="inputlabel" for="region">Country</label>
@@ -67,6 +68,7 @@
     <script src="../jsfile/search_wells.js"></script>
     <script src="../jsfile/jquery.min.js"></script>
     <script src="../jsfile/fontawesome.js"></script>
+    <script src="../jsfile/main.js"></script>
 
 </body>
 

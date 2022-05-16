@@ -88,6 +88,18 @@ button[enabled] {
   display: inline-block;
   width: 400px;
 }
+
+successfeedback
+{
+  padding-top: 50px;
+  font-size: 1.1em;
+  color: white;
+  display: inline-block;
+  width: 200px;
+}
+.shiftclass{
+  padding-left: 65%;
+}
 .inputclass {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -106,7 +118,7 @@ button[enabled] {
   font-size: 1em;
   color: white !important;
   display: inline-block;
-  width: 125px;
+  width: 200px;
   padding-bottom: 5px;
 }
 
@@ -161,7 +173,7 @@ button[disabled] {
   text-align: center;
   font-weight: bold;
   font-size: 1rem;
-  margin-right: 20px;
+  margin-right: 5px;
   color: white;
 }
 .labeclass {

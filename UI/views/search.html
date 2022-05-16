@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
     <link rel="stylesheet" href="../style/styles.css">
 </head>
 
@@ -20,25 +21,35 @@
                     <div class="inputdiv">
                         <label class="inputlabel" for="lname" class="labeclass">Country:</label>
                         <select class="selectdropdown name=" country" id="country">
-                            <option disabled selected value> -- select an option -- </option>
+                            <option disabled selected value> -- select country -- </option>
                             <option class="service-small" value="india">India</option>
                             <option class="service-small" value="usa">USA</option>
+                            <option class="service-small" value="china">China</option>
+                            <option class="service-small" value="finland">Finland</option>
+                            <option class="service-small" value="france">France</option>
+                            <option class="service-small" value="ghana">Ghana</option>
+                            <option class="service-small" value="australia">Australia</option>
+                            <option class="service-small" value="france">France</option>
+                            <option class="service-small" value="ghana">Ghana</option>
                         </select>
                     </div>
                     <div class="inputdiv">
                         <label class="inputlabel" for="fname" class="labeclass">Gender:</label>
                         <select class="selectdropdown" name="gender" id="gender">
-                            <option disabled selected value> -- select an option -- </option>
+                            <option disabled selected value> -- select gender-- </option>
                             <option class="service-small" value="male">Male</option>
                             <option class="service-small" value="female">Female</option>
+                            <option class="service-small" value="female">Transgender</option>
                         </select>
                     </div>
                     <div class="inputdiv">
                         <label class="inputlabel" for="lname" class="labeclass">Language:</label>
                         <select class="selectdropdown name=" language" id="language">
-                            <option disabled selected value> -- select an option -- </option>
+                            <option disabled selected value> -- select language -- </option>
                             <option class="service-small" value="English">English</option>
                             <option class="service-small" value="Kannada">Kannada</option>
+                            <option class="service-small" value="French">French</option>
+                            <option class="service-small" value="Korean">Korean</option>
                             <option class="service-small" value="Telugu">Telugu</option>
                             <option class="service-small" value="Tamil">Tamil</option>
                             <option class="service-small" value="Hindi">Hindi</option>
@@ -53,17 +64,19 @@
             <div id="outputAudio" hidden="true">
                 <audio id="searchaudiotag" controls="" src=""></audio><br><br>
                 <div id="transcript_output">
-                    <label class="inputlabel labeclass" for="lname">Phoneme:</label>
-                    <span id="phonemespan" class="transcript_word"></span><br><br>
-                    <label class="phonemeinputlabel" for="lname">Correct phoneme:</label>
                     <img id="thumbsup" class="transcript_word" src="../images/thumpsUp.jpg"
-                        onclick="countthumbsup()"></span><br><br>
-                    <label class="phonemeinputlabel" for="lname">Incorrect phoneme:</label>
+                        onclick="countthumbsup()"></span>
+                    <label class="phonemeinputlabel" for="lname">Correct Pronunciation</label>
                     <img id="thumbsdown" class="transcript_word" onclick="countthumbsdown()"
-                        src="../images/thumbsDown.jpg"></span><br>
+                        src="../images/thumbsDown.jpg"></span>
+                    <label class="phonemeinputlabel" for="lname">Incorrect Pronunciation</label><br /><br />
+                    <label class="inputlabel labeclass" for="lname">Name:</label>
+                    <span id="namespan" class="transcript_word"></span><br>
+                    <label class="inputlabel labeclass" for="lname">Phoneme:</label>
+                    <span id="phonemespan" class="transcript_word"></span><br>
                     <div class="feebackdiv">
-                        <label class="labeclass"><a id="feedbacklink" onclick="enablefeeback()" href="#">Record Your
-                                Feeback</a></label>
+                        <label class="labeclass"><a id="feedbacklink" onclick="enablefeeback()"
+                                href="#">Feeback</a></label>
                     </div>
                     <div class="feedbackitems" id="feedbacksection" hidden="true">
                         <input placeholder="enter your Email" id="feebackemail" type="email" required />
@@ -74,6 +87,9 @@
                         <br>
                         <div class="feebackdiv">
                             <button id="feedbacksubmit" type="submit" onclick="submitfeedback()">Submit</button>
+                        </div>
+                        <div id="successfeedback" hidden= "hidden">
+                            <span class="successfeedback labeclass shiftclass">Feedback submited</span>
                         </div>
                     </div>
                 </div>

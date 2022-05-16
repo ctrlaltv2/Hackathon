@@ -215,8 +215,8 @@ if(updaterecord != undefined || updaterecord != null) {
       "name": username,
       "gender": usergender,
       "language": userlanguage,
-      "country": usercountry,
-       "id": id
+      "country": "usercountry",
+       "id": id,
       };
     var xhr = new XMLHttpRequest();
     xhr.onload = function (e) {
@@ -240,13 +240,14 @@ if(updaterecord != undefined || updaterecord != null) {
 }
 }
 async function uploadFile() {
+  id = document.getElementById('idlabel').innerHTML;
  // getUserDetail();
   var pronounce={ 
-    "name": "test",
-    "gender": "Male",
-    "language": "Telugu",
-    "country": "USA",
-     "id": 36
+    "name": username,
+    "gender": usergender,
+    "language": userlanguage,
+    "country": usercountry,
+     "id": id
     };
 
     var xhr = new XMLHttpRequest();
@@ -264,5 +265,8 @@ async function uploadFile() {
     xhr.send(fd);
   }
 
+  function pagereload(){
+    location.reload();
+  }
 
 

@@ -16,6 +16,14 @@ function enableFunction(){
     }
 }
 
+function enablerecordFunction(){
+  if ( userName.value!=null && userName.value!=""){
+      submitButton.disabled = false;
+  }
+  else{
+      submitButton.disabled = true;
+  }
+}
 function searchPronunciation(){
     var uname=userName.value;
     // $.ajax({
@@ -63,15 +71,18 @@ function searchPronunciation(){
         success: function(response) {
           if (response.length === 0) {
             document.getElementById('searchempty').hidden=false;
+            document.getElementById('outputAudio').hidden=true;
         }
         else{
           document.getElementById('outputAudio').hidden=false;
+          document.getElementById('searchempty').hidden=true;
           const item=response.reduce((prev,current) => (+prev.likes > +current.likes) ? prev : current);
           id=item.id;
         //const max=Math.max.apply(null,response.map(item => item.likes));
         console.log(item);
          document.getElementById('searchaudiotag').setAttribute("src","https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/download?filename="+item.filename);
          document.getElementById('phonemespan').textContent=item.phoneme;
+         document.getElementById('namespan').textContent=item.name;
         }
       },
         error: function(xhr) {
@@ -128,17 +139,19 @@ function enablefeeback (){
  function submitfeedback(){
   $.ajax({
     url: 'https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/addcomments',
-    dataType: 'json',
+    dataType: 'text',
     type: 'post',
     contentType: 'application/json',
     data: JSON.stringify( { "email":   document.getElementById('feebackemail').value,
     "name": document.getElementById('feebackname').value,
     "commentsDesc":  document.getElementById('feedbacktext').value,
     "id": id,} ),
-    processData: false,
-    success: function( ){    
+     processData: false,
+    success: function(response){  
+      console.log(response);
+      successfeedback.removeAttribute("hidden");
     },
-    error: function( ){
+    error: function(){
     }
  });
 }
