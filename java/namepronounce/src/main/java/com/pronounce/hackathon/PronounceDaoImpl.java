@@ -20,11 +20,7 @@ public class PronounceDaoImpl implements PronounceDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	private final String INSERT_SQL = "INSERT INTO Pronounce(name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes) values (?,?,?,?,?,?,?,?,?,?) ";
-	private final String SELECT_SQL_NAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE name=?";
-	private final String SELECT_SQL_NAME_LANG = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE name=? and language=?";
 	private final String SELECT_SQL_ID = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE id=?";
-	private final String SELECT_SQL_FILENAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE filename=?";
-	private final String SELECT_SQL_EMP_ID = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE empid=?";
 	
 	private final String UPDATE_LIKES ="UPDATE Pronounce set likes= likes + 1 where id=?";
 	private final String UPDATE_DIS_LIKES ="UPDATE Pronounce set dislikes= dislikes + 1 where id=?";
@@ -64,20 +60,26 @@ public class PronounceDaoImpl implements PronounceDao {
 	}
 
 	@Override
-	public List<PronounceDetails> fetch(String name, String id, String filename,String language,String empid) {
-		if(empid != null) {
-			return jdbcTemplate.query(SELECT_SQL_EMP_ID, new Object[] {empid}, new PronounceRowMapper());
-		}else
-		if(name != null && language != null && language != "" ) {
-			return jdbcTemplate.query(SELECT_SQL_NAME_LANG, new Object[] {name,language}, new PronounceRowMapper());
-		}else if(name != null) {
-			return jdbcTemplate.query(SELECT_SQL_NAME, new Object[] {name}, new PronounceRowMapper());
-		}else if(id != null) {
-			return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {id}, new PronounceRowMapper());
-		}else if(filename != null) {
-			return jdbcTemplate.query(SELECT_SQL_FILENAME, new Object[] {filename}, new PronounceRowMapper());
+	public List<PronounceDetails> fetch(String name, String id, String filename,String language,String country,String gender) {
+		
+		if(id != null) {
+			return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {id},new PronounceRowMapper());
 		}
-		return null;
+		
+		StringBuilder sb =new StringBuilder();
+		sb.append("SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE name='"+name+"' ");
+		
+		if(language != null && !"".equals(language)) {
+			sb.append(" AND language='"+language+"' ");
+		}
+		if(country != null && !"".equals(country)) {
+			sb.append(" AND country='"+country+"' ");
+		}
+		if(gender != null && !"".equals(gender)) {
+			sb.append(" AND gender='"+gender+"' ");
+		}
+
+		return jdbcTemplate.query(sb.toString(),new PronounceRowMapper());
 	}
 
 	@Override

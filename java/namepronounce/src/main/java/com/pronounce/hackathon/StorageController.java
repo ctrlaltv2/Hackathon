@@ -99,8 +99,9 @@ class StorageController {
 			@RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "filename", required = false) String filename,
 			@RequestParam(value = "language", required = false) String language,
-			@RequestParam(value = "empid", required = false) String empid) {
-		List<PronounceDetails> list = pronounceDao.fetch(name, id, filename,language,empid);
+			@RequestParam(value = "country", required = false) String country,
+			@RequestParam(value = "gender", required = false) String gender) {
+		List<PronounceDetails> list = pronounceDao.fetch(name, id, filename,language,country,gender);
 		if (list != null) {
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		}
