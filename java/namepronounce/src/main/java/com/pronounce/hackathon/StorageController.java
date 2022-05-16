@@ -74,7 +74,7 @@ class StorageController {
 		final byte[] byteArray = convertToByteArray(filePart);
 		int index = filePart.filename().lastIndexOf('.');
 		String extension = filePart.filename().substring(index + 1);
-		String fileNameinGCP = String.valueOf(timestamp) + "_" + pronouceDetails.getName() + "." + extension;
+		String fileNameinGCP = String.valueOf(timestamp) + "_" + pronouceDetails.getName().replaceAll("\\s","")+ "." + extension;
 		pronouceDetails.setFilename(fileNameinGCP);
 		Random rand = new Random();
 		final BlobId blobId = constructBlobId(bucketName, subdirectory, fileNameinGCP);
