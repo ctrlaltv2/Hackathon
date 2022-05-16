@@ -8,6 +8,7 @@ function loadprofile() {
         url: "https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/getProfiles",
         //https://phonemeservice-dot-main-crow-349906.uc.r.appspot.com/
         type: "get", //send it through get method,
+        case:true,
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
@@ -88,6 +89,7 @@ span.onclick = function() {
   document.getElementById("updaterecord").setAttribute("hidden","hidden");
   document.getElementById("upload-button").removeAttribute("hidden");
   modal.style.display = "none";
+  location.reload();
 
   document.getElementById("recordingsList").innerHTML = "";
 
