@@ -5,10 +5,11 @@
 - Run pip install -r requirements.txt from fastapi folder.
 
 #### JAVA API IMPLEMENTATION
-JAVA Version: 1.8
-Database: GCP MYSQL
-Server: GCP APP ENGINE
-Framework: SPRING BOOT REST API
+- JAVA Version: 1.8
+- Database: GCP MYSQL
+- Server: GCP APP ENGINE
+- Framework: SPRING BOOT REST API
+- Storage : GCP Storage
 
 API Details:
 
