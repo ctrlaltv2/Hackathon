@@ -1,6 +1,10 @@
 # Hackathon
 
-####### JAVA API IMPLEMENTATION ##########
+#### Python API IMPLEMENTATION
+- It uses Python fastapi implementation to generate phonemes.
+- Run pip install -r requirements.txt from fastapi folder.
+
+#### JAVA API IMPLEMENTATION
 JAVA Version: 1.8
 Database: GCP MYSQL
 Server: GCP APP ENGINE
@@ -117,35 +121,8 @@ Request: curl -X GET --header 'Accept: application/json' 'https://namepronounce-
 response: Response :  {"name":"john","gender":"female","language":"Hindi","country":"usa","id":86,"phoneme":"dʒɑːn","grafeme":null,"filename":"1652691386520_john.wav","empid":null,"likes":1,"dislikes":0},{"name":"Swarup Reddy","gender":"male","language":"Telugu","country":"india","id":85,"phoneme":"swɛrəp rɛdi","grafeme":null,"filename":"1652691313373_SwarupReddy.wav","empid":"8122195","likes":0,"dislikes":0},{"name":"Naresh","gender":"male","language":"Tamil","country":"india","id":84,"phoneme":"nærɪʃ","grafeme":null,"filename":"1652691283210_Naresh.wav","empid":"5728848","likes":0,"dislikes":1}
 
 
-**DATABBBASE Details:**
+#### DATABASE Details:
 
 DATABASE USED: GCP MYSQL
-database-name=pronounce
-cloud.gcp.sql.instance-connection-name=main-crow-349906:us-central1:hackathon
-username=admin
-password=****
-cloud.gcp.project-id=main-crow-349906
-connection URL: jdbc:mysql://google/pronounce?socketFactory=com.google.cloud.sql.mysql.SocketFactory&cloudSqlInstance=main-crow-349906:us-central1:hackathon
 
-
-**Table Strcture:**
-
-CREATE TABLE Pronounce (id int NOT NULL AUTO_INCREMENT,
-name varchar(50) NOT NULL,
-gender varchar(10),
-country varchar(15),
-phoneme varchar(50),
-grafeme varchar(50),
-language varchar(15),
-empid varchar(15),
-likes int,
-dislikes int,
-PRIMARY KEY (id));
-
-CREATE TABLE COMMENTS( commentId int NOT NULL AUTO_INCREMENT,
-email varchar(50),
-name varchar(50), 
-commentDesc VARCHAR(300),
-id int, primary key (commentId),
- foreign key (id) references Pronounce(id));
 
