@@ -19,7 +19,7 @@
                 <div class="inputclass">
                     <div class="inputdiv">
                         <label class="inputlabel required labeclass" for="fname">Name:</label>
-                        <input type="text" id="name" name="name" required onkeyup="enableFunction()">
+                        <input type="text" id="name" name="name" required onkeyup="enableFunction()"/>
                     </div>
                     <div class="inputdiv">
                         <label class="inputlabel" for="region">Country</label>
@@ -30,7 +30,13 @@
                     </div>
                     <div class="inputdiv">
                         <label class="inputlabel" for="language">Language:</label>
-                        <input type="text" id="language" name="language">
+                        <select class="selectdropdown name=" language" id="language">
+                            <option class="service-small" value="English">English</option>
+                            <option class="service-small" value="Kannada">Kannada</option>
+                            <option class="service-small" value="Telugu">Telugu</option>
+                            <option class="service-small" value="Tamil">Tamil</option>
+                            <option class="service-small" value="Hindi">Hindi</option>
+                        </select>
                     </div>
                     <div class="inputdiv">
                         <label class="inputlabel" for="gender">Gender</label>
@@ -46,15 +52,19 @@
                         <button type="submit" class="submitrecord" id="submitbtn" value="SumitRecord"
                             disabled>Submit</button>
                     </div>
+                    <div id="successmsg" visibility: hidden>
+                        <span class="successmsg">Recorded Sucessfully</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="../jsfile/recorder.js"></script>
     <script src="../jsfile/recorder_wells.js"></script>
-    <script src="../jsfile/fontawesome.js"></script>
     <script src="../jsfile/search_wells.js"></script>
     <script src="../jsfile/jquery.min.js"></script>
+    <script src="../jsfile/fontawesome.js"></script>
+
 </body>
 
 </html>

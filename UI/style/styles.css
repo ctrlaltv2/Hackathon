@@ -34,12 +34,26 @@ button[enabled] {
   background-image: url("../images/wellsbackground.jpg");
   height: 100%;
   width: 100%;
+  overflow:auto;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
+.wellsvoicemodel {
+  background-image: url("../images/wellsbackground.jpg");
+  height: 100%;
+  width: 100%;
+  overflow:auto;
+  background-repeat: no-repeat;
+  background-size: 100% 93%;
+}
+
 .myvocalizer {
   position: unset !important;
+}
+.profileicon{
+  width: 30px;
+  height: 30px;
 }
 
 .allfeature {
@@ -68,6 +82,13 @@ button[enabled] {
   width: fit-content;
 }
 
+.successmsg{
+  padding-top: 50px;
+  font-size: 1.1em;
+  color: white;
+  display: inline-block;
+  width: 400px;
+}
 .inputclass {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -80,6 +101,15 @@ button[enabled] {
   color: white;
   display: inline-block;
   width: 100px;
+}
+
+.phonemeinputlabel
+{
+  font-size: 1.1em;
+  color: white !important;
+  display: inline-block;
+  width: 150px;
+  padding-bottom: 5px;
 }
 
 .inputdiv {
@@ -155,6 +185,12 @@ button[disabled] {
   position: absolute;
   left:25%
 }
+
+.updaterecord{
+  width: 100px;
+  position: absolute;
+  left:45%
+}
 audio {
   height: 30px;
   width: 200Px;
@@ -199,7 +235,6 @@ a:visited {
   border: black;
   /* border-style: solid; */
   margin-left: 10%;
-  padding-top: 2%;
   padding-left: 5%;
 }
 
@@ -212,13 +247,14 @@ a:visited {
 }
 .nametd {
   height: 50px;
-  width: 100px;
+  width: 170px;
+  text-align: start;
 }
 
 .audiotd {
   height: 50px;
   width: 100px;
-  padding-left: 25px;
+  text-align: start;
 }
 .phonemstd {
   height: 50px;
@@ -229,4 +265,44 @@ a:visited {
 .audioicon {
   height: 25px !important;
   width: 180px !important;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  height: 60%
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
