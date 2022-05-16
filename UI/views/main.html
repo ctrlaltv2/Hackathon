@@ -6,7 +6,7 @@
 
 </head>
 
-<body  onload="loadprofile()">
+<body onload="loadprofile()">
     <div class="wellsvoice">
         <div>
             <p class="linktag"><a href="../views/search.html">Search Pronunciation</a> <a
@@ -28,46 +28,51 @@
         </div>
     </div>
     <div id="myModal" class="modal">
-        
+
         <!-- Modal content -->
         <div class="modal-content">
-          <span class="close">&times;</span>
-          <div class="wellsvoicemodel">
-            <div class="popupmaindiv">
-                <h2 class="labeclass">Update Record </h2>
-                <div class="features">
-                    <button id="recordButton" class="embedbutton"> <i class="fa fa-microphone" aria-hidden="true"></i>
-                        Record</button>
-                    <button id="stopButton" class="embedbutton" disabled="true" style="background: rgb(31, 176, 232); "><i
-                            class="fa fa-microphone-slash" aria-hidden="true"></i>
-                        Stop</button>
-                    <br>
-                    <div class="labeclass choosefilediv">
-                        <label for="myfile">Select a file:</label>
-                        <input id="fileupload" type="file" name="fileupload"/>
-                        <button id="upload-button" onclick="uploadFile()"> Upload </button>
-                    </div>
-                    <div class="recordedaudio">
-                        <ol id="recordingsList"></ol>
-                    </div>
-                    <div class="submitrecorddiv">
-                        <button type="submit" hidden = "hidden" class="updaterecord" id="updaterecord" value="UpdateRecord" >Submit</button>
-                    </div>
-                    <div id="successmsg" hidden="hidden">
-                        <span class="successmsg">Recorded Sucessfully</span>
-                    </div>
-                    <div>
-                       <label id="idlabel" hidden="true"></label>
+            <span class="close">&times;</span>
+            <div class="wellsvoicemodel">
+                <div class="popupmaindiv">
+                    <h2 class="labeclass">Update Record </h2>
+                    <div class="features">
+                        <button id="recordButton" class="embedbutton"> <i class="fa fa-microphone"
+                                aria-hidden="true"></i>
+                            Record</button>
+                        <button id="stopButton" class="embedbutton" disabled="true"
+                            style="background: rgb(31, 176, 232); "><i class="fa fa-microphone-slash"
+                                aria-hidden="true"></i>
+                            Stop</button>
+                        <br>
+                        <div class="labeclass choosefilediv">
+                            <label for="myfile">Select a file:</label>
+                            <input id="fileupload" type="file" name="fileupload" />
+                            <button id="upload-button" onclick="uploadFile()"> Upload </button>
+                        </div>
+                        <div class="recordedaudio">
+                            <ol id="recordingsList"></ol>
+                        </div>
+                        <div class="submitrecorddiv">
+                            <button type="submit" hidden="hidden" class="updaterecord" id="updaterecord"
+                                value="UpdateRecord">Submit</button>
+                        </div>
+                        <div id="successmsg" hidden="hidden">
+                            <span class="successmsg">Recorded Sucessfully</span>
+                        </div>
+                        <div>
+                            <label id="idlabel" hidden="true"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-        </div>
-      
-      </div>
-    <script src="../jsfile/main.js"/></script>
-    <script src="../jsfile/recorder.js"/></script>
+    </div>
+
+    </div>
+    <script src="../jsfile/main.js" />
+    </script>
+    <script src="../jsfile/recorder.js" />
+    </script>
     <script src="../jsfile/jquery.min.js"></script>
     <script src="../jsfile/recorder_wells.js"></script>
     <script src="../jsfile/fontawesome.js"></script>

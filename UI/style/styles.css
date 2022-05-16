@@ -34,7 +34,7 @@ button[enabled] {
   background-image: url("../images/wellsbackground.jpg");
   height: 100%;
   width: 100%;
-  overflow:auto;
+  overflow: auto;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -43,7 +43,7 @@ button[enabled] {
   background-image: url("../images/wellsbackground.jpg");
   height: 100%;
   width: 100%;
-  overflow:auto;
+  overflow: auto;
   background-repeat: no-repeat;
   background-size: 100% 93%;
 }
@@ -51,7 +51,7 @@ button[enabled] {
 .myvocalizer {
   position: unset !important;
 }
-.profileicon{
+.profileicon {
   width: 30px;
   height: 30px;
 }
@@ -62,12 +62,11 @@ button[enabled] {
   border: black;
   /* border-style: solid; */
   margin-left: 10%;
-  padding-top: 8%;
+  padding-top: 2%;
   padding-left: 10%;
 }
 
-.popupmaindiv
-{
+.popupmaindiv {
   border: black;
   /* border-style: solid; */
   margin-left: 10%;
@@ -75,14 +74,14 @@ button[enabled] {
   padding-left: 10%;
 }
 
-.choosefilediv{
+.choosefilediv {
   padding-top: 20px;
 }
 .features {
   width: fit-content;
 }
 
-.successmsg{
+.successmsg {
   padding-top: 50px;
   font-size: 1.1em;
   color: white;
@@ -103,12 +102,11 @@ button[enabled] {
   width: 100px;
 }
 
-.phonemeinputlabel
-{
-  font-size: 1.1em;
+.phonemeinputlabel {
+  font-size: 1em;
   color: white !important;
   display: inline-block;
-  width: 150px;
+  width: 125px;
   padding-bottom: 5px;
 }
 
@@ -155,16 +153,14 @@ button[disabled] {
 }
 .transcript_word {
   border: 1px solid hsl(0, 17%, 95%);
-  height: 2.5rem;
-  min-width: 2rem;
+  height: 1.5rem;
+  min-width: 1rem;
   border: none;
   border-radius: 0.15rem;
-  margin-left: 0.5rem;
   align-items: center;
   text-align: center;
   font-weight: bold;
   font-size: 1rem;
-  padding: 5px;
   margin-right: 20px;
   color: white;
 }
@@ -177,23 +173,23 @@ button[disabled] {
   padding-bottom: 4%;
 }
 
-.submitrecorddiv{
+.submitrecorddiv {
   flex-shrink: 0;
 }
 .submitrecord {
   width: 100px;
   position: absolute;
-  left:25%
+  left: 25%;
 }
 
-.updaterecord{
+.updaterecord {
   width: 100px;
   position: absolute;
-  left:45%
+  left: 45%;
 }
 audio {
   height: 30px;
-  width: 200Px;
+  width: 200px;
   padding-left: 0;
 }
 
@@ -207,6 +203,18 @@ audio {
   padding-left: 60%;
   padding-top: 3%;
   font-size: 20px;
+}
+
+.feebackdiv {
+  padding-left: 50%;
+}
+
+.feedbackitems {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.textareaclass {
+  padding-top: 10px;
 }
 a:link {
   padding-left: 20px;
@@ -238,8 +246,7 @@ a:visited {
   padding-left: 5%;
 }
 
-.phonemsth
-{
+.phonemsth {
   height: 50px;
   width: 150px;
   padding-left: 25px;
@@ -277,8 +284,8 @@ a:visited {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -288,7 +295,7 @@ a:visited {
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
-  height: 60%
+  height: 60%;
 }
 
 /* The Close Button */
@@ -297,7 +304,6 @@ a:visited {
   float: right;
   font-size: 25px;
   font-weight: bold;
-
 }
 
 .close:hover,

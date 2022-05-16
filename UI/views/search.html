@@ -7,12 +7,15 @@
 <body style="overflow: hidden;">
     <div class="wellsvoice">
         <div class="allfeature">
+            <div class="linktag">
+                <a href="javascript:history.back()">Go back</a>
+            </div>
             <div class="features">
                 <h2 class="labeclass">Search Pronunciation </h2>
                 <form>
                     <div class="inputdiv">
                         <label class="inputlabel required labeclass" for="fname">Name:</label>
-                        <input type="text" id="name" name="name" required onkeyup="enableFunction()"/>
+                        <input type="text" id="name" name="name" required onkeyup="enableFunction()" />
                     </div>
                     <div class="inputdiv">
                         <label class="inputlabel" for="lname" class="labeclass">Country:</label>
@@ -50,15 +53,36 @@
             <div id="outputAudio" hidden="true">
                 <audio id="searchaudiotag" controls="" src=""></audio><br><br>
                 <div id="transcript_output">
-                    <label class="inputlabel labeclass" for="lname" >Phoneme:</label>
+                    <label class="inputlabel labeclass" for="lname">Phoneme:</label>
                     <span id="phonemespan" class="transcript_word"></span><br><br>
-                    <label class="phonemeinputlabel" for="lname" >Correct phoneme:</label>
-                    <img id="thumbsup" class="transcript_word" src="../images/thumpsUp.jpg" onclick="countthumbsup()"></span><br><br>
+                    <label class="phonemeinputlabel" for="lname">Correct phoneme:</label>
+                    <img id="thumbsup" class="transcript_word" src="../images/thumpsUp.jpg"
+                        onclick="countthumbsup()"></span><br><br>
                     <label class="phonemeinputlabel" for="lname">Incorrect phoneme:</label>
-                    <img id="thumbsdown" class="transcript_word" onclick="countthumbsdown()" src="../images/thumbsDown.jpg"></span><br>
+                    <img id="thumbsdown" class="transcript_word" onclick="countthumbsdown()"
+                        src="../images/thumbsDown.jpg"></span><br>
+                    <div class="feebackdiv">
+                        <label class="labeclass"><a id="feedbacklink" onclick="enablefeeback()" href="#">Record Your
+                                Feeback</a></label>
+                    </div>
+                    <div class="feedbackitems" id="feedbacksection" hidden="true">
+                        <input placeholder="enter your Email" id="feebackemail" type="email" required />
+                        <input placeholder="enter your Name" id="feebackname" type="text" />
+                        <div class="textareaclass">
+                            <textarea placeholder="enter your feedback" id="feedbacktext" rows="3" cols="46"></textarea>
+                        </div>
+                        <br>
+                        <div class="feebackdiv">
+                            <button id="feedbacksubmit" type="submit" onclick="submitfeedback()">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div id="searchempty" hidden="true">
+            <label class="labeclass"><b>Name is not available in our record, Please record</b></label>
+        </div>
+    </div>
     </div>
     <script src="../jsfile/recorder.js"></script>
     <script src="../jsfile/search_wells.js"></script>
