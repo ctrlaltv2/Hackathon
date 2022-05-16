@@ -8,6 +8,7 @@ var likescount, dislikecount,id;
 
 function enableFunction(){
     if ( userName.value!=null && userName.value!=""){
+      document.getElementById('searchempty').hidden=true;
         submitButton.disabled = false;
     }
     else{
@@ -16,7 +17,6 @@ function enableFunction(){
 }
 
 function searchPronunciation(){
-    document.getElementById('outputAudio').hidden=false;
     var uname=userName.value;
     // $.ajax({
     //     url: "https://phonemeservice-dot-main-crow-349906.uc.r.appspot.com/getPhoneme",
@@ -61,13 +61,19 @@ function searchPronunciation(){
 
       },
         success: function(response) {
+          if (response.length === 0) {
+            document.getElementById('searchempty').hidden=false;
+        }
+        else{
+          document.getElementById('outputAudio').hidden=false;
           const item=response.reduce((prev,current) => (+prev.likes > +current.likes) ? prev : current);
           id=item.id;
         //const max=Math.max.apply(null,response.map(item => item.likes));
         console.log(item);
          document.getElementById('searchaudiotag').setAttribute("src","https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/download?filename="+item.filename);
          document.getElementById('phonemespan').textContent=item.phoneme;
-        },
+        }
+      },
         error: function(xhr) {
         }
       });
@@ -115,4 +121,24 @@ function countthumbsdown(){
   });
 }
 
+function enablefeeback (){
+  document.getElementById('feedbacksection').hidden=false;
+}
 
+ function submitfeedback(){
+  $.ajax({
+    url: 'https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/addcomments',
+    dataType: 'json',
+    type: 'post',
+    contentType: 'application/json',
+    data: JSON.stringify( { "email":   document.getElementById('feebackemail').value,
+    "name": document.getElementById('feebackname').value,
+    "commentsDesc":  document.getElementById('feedbacktext').value,
+    "id": id,} ),
+    processData: false,
+    success: function( ){    
+    },
+    error: function( ){
+    }
+ });
+}
