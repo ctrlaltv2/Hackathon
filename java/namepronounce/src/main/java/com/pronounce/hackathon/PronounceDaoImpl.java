@@ -19,16 +19,20 @@ import org.springframework.stereotype.Repository;
 public class PronounceDaoImpl implements PronounceDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	private final String INSERT_SQL = "INSERT INTO Pronounce(name,gender,country,phoneme,grafeme,language,filename) values (?,?,?,?,?,?,?) ";
-	private final String SELECT_SQL_NAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename FROM Pronounce WHERE name=?";
-	private final String SELECT_SQL_NAME_LANG = "SELECT id,name,gender,country,phoneme,grafeme,language,filename FROM Pronounce WHERE name=? and language=?";
-	private final String SELECT_SQL_ID = "SELECT id,name,gender,country,phoneme,grafeme,language,filename FROM Pronounce WHERE id=?";
-	private final String SELECT_SQL_FILENAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename FROM Pronounce WHERE filename=?";
-
+	private final String INSERT_SQL = "INSERT INTO Pronounce(name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes) values (?,?,?,?,?,?,?,?,?,?) ";
+	private final String SELECT_SQL_NAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE name=?";
+	private final String SELECT_SQL_NAME_LANG = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE name=? and language=?";
+	private final String SELECT_SQL_ID = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE id=?";
+	private final String SELECT_SQL_FILENAME = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE filename=?";
+	private final String SELECT_SQL_EMP_ID = "SELECT id,name,gender,country,phoneme,grafeme,language,filename,empid,likes,dislikes FROM Pronounce WHERE empid=?";
+	
+	private final String UPDATE_LIKES ="UPDATE Pronounce set likes= likes + 1 where id=?";
+	private final String UPDATE_DIS_LIKES ="UPDATE Pronounce set dislikes= dislikes + 1 where id=?";
+	private final String UPDATE ="UPDATE Pronounce set name=?,gender=?,country=?,language=?,filename=?,empid=? where id=?";
 	@Override
 	public List<PronounceDetails> findAll() {
 
-		 return jdbcTemplate.query("select * from Pronounce", new PronounceRowMapper());
+		 return jdbcTemplate.query("select * from Pronounce order by id desc limit 10", new PronounceRowMapper());
 	}
 
 	@Override
@@ -46,6 +50,9 @@ public class PronounceDaoImpl implements PronounceDao {
 				ps.setString(5, pronounce.getGrafeme());
 				ps.setString(6, pronounce.getLanguage());
 				ps.setString(7, pronounce.getFilename());
+				ps.setString(8, pronounce.getEmpid());
+				ps.setString(9,"0");
+				ps.setString(10,"0");
 				return ps;
 			}
 		}, holder);
@@ -56,8 +63,11 @@ public class PronounceDaoImpl implements PronounceDao {
 	}
 
 	@Override
-	public List<PronounceDetails> fetch(String name, String id, String filename,String language) {
-		if(name != null && language != null) {
+	public List<PronounceDetails> fetch(String name, String id, String filename,String language,String empid) {
+		if(empid != null) {
+			return jdbcTemplate.query(SELECT_SQL_EMP_ID, new Object[] {empid}, new PronounceRowMapper());
+		}else
+		if(name != null && language != null && language != "" ) {
 			return jdbcTemplate.query(SELECT_SQL_NAME_LANG, new Object[] {name,language}, new PronounceRowMapper());
 		}else if(name != null) {
 			return jdbcTemplate.query(SELECT_SQL_NAME, new Object[] {name}, new PronounceRowMapper());
@@ -67,6 +77,24 @@ public class PronounceDaoImpl implements PronounceDao {
 			return jdbcTemplate.query(SELECT_SQL_FILENAME, new Object[] {filename}, new PronounceRowMapper());
 		}
 		return null;
+	}
+
+	@Override
+	public List<PronounceDetails> udateLikes(String id) {
+		jdbcTemplate.update(UPDATE_LIKES,id);
+		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {id}, new PronounceRowMapper());
+	}
+
+	@Override
+	public List<PronounceDetails> udateDisLikes(String id) {
+		jdbcTemplate.update(UPDATE_DIS_LIKES,id);
+		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {id}, new PronounceRowMapper());
+	}
+
+	@Override
+	public PronounceDetails udateProfile(PronounceDetails obj) {
+		jdbcTemplate.update(UPDATE,obj.getName(),obj.getGender(),obj.getCountry(),obj.getLanguage(),obj.getFilename(),obj.getEmpid(),obj.getId());
+		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {obj.getId()}, new PronounceRowMapper()).get(0);
 	}
 
 
@@ -85,7 +113,9 @@ class PronounceRowMapper implements RowMapper<PronounceDetails> {
     	pronounce.setFilename(rs.getString("filename"));
     	pronounce.setPhoneme(rs.getString("phoneme"));
     	pronounce.setGrafeme(rs.getString("grafeme"));
-
+    	pronounce.setEmpid(rs.getString("empid"));
+    	pronounce.setLikes(rs.getInt("likes"));
+    	pronounce.setDislikes(rs.getInt("dislikes"));
         return pronounce;
     }
 }

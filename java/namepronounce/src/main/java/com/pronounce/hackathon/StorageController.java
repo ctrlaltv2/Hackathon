@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.activation.FileTypeMap;
 import javax.annotation.Nullable;
@@ -18,10 +19,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.cloud.storage.Blob;
@@ -35,6 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@CrossOrigin(origins="*",maxAge=3600)
 class StorageController {
 
 	@Value("${bucketname}")
@@ -70,13 +74,21 @@ class StorageController {
 		final byte[] byteArray = convertToByteArray(filePart);
 		int index = filePart.filename().lastIndexOf('.');
 		String extension = filePart.filename().substring(index + 1);
-		String fileNameinGCP = String.valueOf(timestamp) + "_" + pronouceDetails.getName() + "." + extension;
+		String fileNameinGCP = String.valueOf(timestamp) + "_" + pronouceDetails.getName().replaceAll("\\s","")+ "." + extension;
 		pronouceDetails.setFilename(fileNameinGCP);
-
+		Random rand = new Random();
 		final BlobId blobId = constructBlobId(bucketName, subdirectory, fileNameinGCP);
 		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
+		
 		storage.create(blobInfo, byteArray);
-		pronounceDao.create(pronouceDetails);
+		
+		if(pronouceDetails.getId() == null ) {
+			pronouceDetails.setEmpid(String.valueOf(rand.nextInt(9999999)));
+			pronounceDao.create(pronouceDetails);
+		}
+		else {
+			pronounceDao.udateProfile(pronouceDetails);
+		}
 
 		return new ResponseEntity<>(pronouceDetails, HttpStatus.OK);
 	}
@@ -86,8 +98,9 @@ class StorageController {
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "filename", required = false) String filename,
-			@RequestParam(value = "language", required = false) String language) {
-		List<PronounceDetails> list = pronounceDao.fetch(name, id, filename,language);
+			@RequestParam(value = "language", required = false) String language,
+			@RequestParam(value = "empid", required = false) String empid) {
+		List<PronounceDetails> list = pronounceDao.fetch(name, id, filename,language,empid);
 		if (list != null) {
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		}
@@ -103,7 +116,39 @@ class StorageController {
 				.contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(filename)))
 				.body(blob.getContent(BlobSourceOption.generationMatch()));
 	}
-
+	@GetMapping(value = "/api/likes")
+	public ResponseEntity<PronounceDetails> updateLikesCount(@RequestParam(value = "id", required = true) String id) {
+		List<PronounceDetails> list = pronounceDao.udateLikes(id);
+		if (list != null) {
+			return new ResponseEntity<>(list.get(0), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
+	@GetMapping(value = "/api/dislikes")
+	public ResponseEntity<PronounceDetails> updateDisLikesCount(@RequestParam(value = "id", required = true) String id) {
+		List<PronounceDetails> list = pronounceDao.udateDisLikes(id);
+		if (list != null & !list.isEmpty()) {
+			return new ResponseEntity<>(list.get(0), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping(value = "/api/getProfiles")
+	public ResponseEntity<List<PronounceDetails>> getProfile() {
+		List<PronounceDetails> list = pronounceDao.findAll();
+		if (list != null & !list.isEmpty()) {
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
+	@PostMapping(value = "/api/updateProfiles")
+	public ResponseEntity<PronounceDetails> updateProfile(@RequestBody PronounceDetails pronouce) {
+		PronounceDetails obj = pronounceDao.udateProfile(pronouce);
+		if (obj != null ) {
+			return new ResponseEntity<>(obj, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	}
 
 	/**
 	 * Construct Blob ID
