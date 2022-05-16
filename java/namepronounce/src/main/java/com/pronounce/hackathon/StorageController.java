@@ -149,6 +149,14 @@ class StorageController {
 		}
 		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 	}
+	@PostMapping(value = "/api/addcomments")
+	public ResponseEntity<String> addComments(@RequestBody Comments comments) {
+		
+		pronounceDao.createComments(comments);
+		
+			return new ResponseEntity<>("comments added",HttpStatus.OK);
+		
+	}
 
 	/**
 	 * Construct Blob ID

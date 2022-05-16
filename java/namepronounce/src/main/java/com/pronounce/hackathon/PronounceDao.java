@@ -10,4 +10,5 @@ public interface PronounceDao {
 	List<PronounceDetails> udateLikes(String id);
 	List<PronounceDetails> udateDisLikes(String id);
 	PronounceDetails udateProfile(PronounceDetails obj);
+	void createComments(Comments comments);
 }

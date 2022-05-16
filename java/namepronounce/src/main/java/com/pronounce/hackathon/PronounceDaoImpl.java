@@ -29,6 +29,7 @@ public class PronounceDaoImpl implements PronounceDao {
 	private final String UPDATE_LIKES ="UPDATE Pronounce set likes= likes + 1 where id=?";
 	private final String UPDATE_DIS_LIKES ="UPDATE Pronounce set dislikes= dislikes + 1 where id=?";
 	private final String UPDATE ="UPDATE Pronounce set name=?,gender=?,country=?,language=?,filename=?,empid=? where id=?";
+	private final String INSERT_COMMENT = "INSERT INTO COMMENTS (email,name,commentDesc,id) values (?,?,?,?)";
 	@Override
 	public List<PronounceDetails> findAll() {
 
@@ -95,6 +96,13 @@ public class PronounceDaoImpl implements PronounceDao {
 	public PronounceDetails udateProfile(PronounceDetails obj) {
 		jdbcTemplate.update(UPDATE,obj.getName(),obj.getGender(),obj.getCountry(),obj.getLanguage(),obj.getFilename(),obj.getEmpid(),obj.getId());
 		return jdbcTemplate.query(SELECT_SQL_ID, new Object[] {obj.getId()}, new PronounceRowMapper()).get(0);
+	}
+
+	@Override
+	public void createComments(Comments comments) {
+		
+		jdbcTemplate.update(INSERT_COMMENT,comments.getEmail(),comments.getName(),comments.getCommentsDesc(),comments.getId());
+		
 	}
 
 
