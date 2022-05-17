@@ -26,6 +26,7 @@ function enablerecordFunction(){
 }
 function searchPronunciation(){
     var uname=userName.value;
+    document.getElementById('submitbtn').innerHTML="Searching..";
     // $.ajax({
     //     url: "https://phonemeservice-dot-main-crow-349906.uc.r.appspot.com/getPhoneme",
     //     //https://phonemeservice-dot-main-crow-349906.uc.r.appspot.com/
@@ -72,6 +73,7 @@ function searchPronunciation(){
           if (response.length === 0) {
             document.getElementById('searchempty').hidden=false;
             document.getElementById('outputAudio').hidden=true;
+            document.getElementById('submitbtn').innerHTML="Search";
         }
         else{
           document.getElementById('outputAudio').hidden=false;
@@ -83,6 +85,7 @@ function searchPronunciation(){
          document.getElementById('searchaudiotag').setAttribute("src","https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/download?filename="+item.filename);
          document.getElementById('phonemespan').textContent=item.phoneme;
          document.getElementById('namespan').textContent=item.name;
+         document.getElementById('submitbtn').innerHTML="Search";
         }
       },
         error: function(xhr) {
@@ -105,6 +108,7 @@ function countthumbsup(){
     id: id,
   },
     success: function(response) {
+      thumbsresponse.removeAttribute("hidden");
     },
     error: function(xhr) {
     }
@@ -126,6 +130,7 @@ function countthumbsdown(){
     id: id,
   },
     success: function(response) {
+      thumbsresponse.removeAttribute("hidden");
     },
     error: function(xhr) {
     }
@@ -137,6 +142,8 @@ function enablefeeback (){
 }
 
  function submitfeedback(){
+  document.getElementById('feedbacksubmit').innerHTML="Submitting..";
+  
   $.ajax({
     url: 'https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/addcomments',
     dataType: 'text',
@@ -150,6 +157,8 @@ function enablefeeback (){
     success: function(response){  
       console.log(response);
       successfeedback.removeAttribute("hidden");
+      document.getElementById('feedbacksubmit').innerHTML="Submit";
+  
     },
     error: function(){
     }

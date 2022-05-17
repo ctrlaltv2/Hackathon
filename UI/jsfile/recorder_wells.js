@@ -7,7 +7,7 @@ var rec; 							//Recorder.js object
 var input; 							//MediaStreamAudioSourceNode we'll be recording
 
 var username, usercountry,usergender,userlanguage,id;
-
+var submitclickcnt=0;
 
 // shim for AudioContext when it's not avb. 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -56,6 +56,13 @@ function startRecording() {
     updaterecord.removeAttribute("hidden");
     document.getElementById("upload-button").setAttribute("hidden","hidden");
   }
+var removelist = document.getElementById("recordingsList");
+if(submitbtn != undefined || submitbtn != null) {
+submitbtn.removeEventListener("click",submitclick);
+}
+while(removelist.hasChildNodes()) {
+  removelist.removeChild(removelist.firstChild);
+}
 console.log("recordButton clicking");
 
 var constraints = { audio: true, video: false }
@@ -130,16 +137,18 @@ function stopRecording() {
   //create the wav blob and pass it on to createDownloadLink
   rec.exportWAV(createDownloadLink);
 }
-
+var filename="";
+var submitblob;
 function createDownloadLink(blob) {
-
+  filename="";
+  submitblob=blob;
   var url = URL.createObjectURL(blob);
   var au = document.createElement('audio');
   var li = document.createElement('li');
   var link = document.createElement('a');
-
+  
   //name of .wav file to use during upload and download (without extendion)
-  var filename = new Date().toISOString()+".wav";
+  filename = new Date().toISOString()+".wav";
   
 
   //add controls to the <audio> element
@@ -165,39 +174,11 @@ function createDownloadLink(blob) {
   var upload = document.createElement('a');
   upload.href = "#";
   upload.innerHTML = "Upload";
-  var fname=document.getElementById('name');
-  var uCountry=document.getElementById('country');
-  var uLanguage=document.getElementById('language');
-  var uGender=document.getElementById('gender');
   var successmsg=document.getElementById('successmsg');
 
   //var va=fname.ariaValueMax;
 if(submitbtn != undefined || submitbtn != null) {
-   submitbtn.addEventListener("click", function (event) {
-     event.stopImmediatePropagation();
-    var pronounce={ 
-      "name": fname.value,
-       "gender": uGender.value,
-       "language": uLanguage.value,
-       "country": uCountry.value,
-       "phoneme": "tɛst",
-       "grafeme": null};
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function (e) {
-      console.log(e)
-      if (this.readyState === 4) {
-        console.log("Server returned: ", e.target.responseText);
-        successmsg.removeAttribute("hidden");
-       
-      }
-    };
-    var fd = new FormData();
-    fd.append("file", blob, filename);
-    console.log(filename);
-    fd.append("pronounce",JSON.stringify(pronounce));
-    xhr.open("POST", "https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/upload", true);
-    xhr.send(fd);
-  })
+   submitbtn.addEventListener("click", submitclick);
 
   li.appendChild(document.createTextNode(" "))//add a space in between
   //li.appendChild(upload)//add the upload link to li
@@ -206,32 +187,46 @@ if(submitbtn != undefined || submitbtn != null) {
   recordingsList.appendChild(li);
 }
 
-if(updaterecord != undefined || updaterecord != null) {
-  id = document.getElementById('idlabel').innerHTML;
-  updaterecord.addEventListener("click", function (event) {
-   // getUserDetail();
-   event.stopImmediatePropagation();
-    var pronounce={ 
-      "name": username,
-      "gender": usergender,
-      "language": userlanguage,
-      "country": "usercountry",
-       "id": id,
-      };
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function (e) {
-      console.log(e)
-      if (this.readyState === 4) {
-        console.log("Server returned: ", e.target.responseText);
-        successmsg.removeAttribute("hidden");
-      }
-    };
-    var fd = new FormData();
-    fd.append("file", blob, filename);
-    fd.append("pronounce",JSON.stringify(pronounce));
-    xhr.open("POST", "https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/upload", true);
-    xhr.send(fd);
-  })
+//var va=fname.ariaValueMax;
+if(updaterecord != undefined || updaterecord != null) { {
+  updaterecord.addEventListener("click", updatesubmitclick);
+
+ li.appendChild(document.createTextNode(" "))//add a space in between
+ //li.appendChild(upload)//add the upload link to li
+
+ //add the li element to the ol
+ recordingsList.appendChild(li);
+}
+
+// if(updaterecord != undefined || updaterecord != null) {
+//   id = document.getElementById('idlabel').innerHTML;
+//   updaterecord.addEventListener("click", function update(event) {
+//    // getUserDetail();
+//    event.stopImmediatePropagation();
+//     var pronounce={ 
+//       "name": username,
+//       "gender": usergender,
+//       "language": userlanguage,
+//       "country": "usercountry",
+//        "id": id,
+//       };
+//     var xhr = new XMLHttpRequest();
+//     xhr.onload = function (e) {
+//       console.log(e)
+//       if (this.readyState === 4 && this.status===200) {
+//         console.log("Server returned: ", e.target.responseText);
+//         successmsg.removeAttribute("hidden");
+//       }
+//       else{
+//         failuremsg.removeAttribute("hidden");
+//        }
+//     };
+//     var fd = new FormData();
+//     fd.append("file", blob, filename);
+//     fd.append("pronounce",JSON.stringify(pronounce));
+//     xhr.open("POST", "https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/upload", true);
+//     xhr.send(fd);
+//   })
   li.appendChild(document.createTextNode(" "))//add a space in between
   //li.appendChild(upload)//add the upload link to li
 
@@ -241,6 +236,8 @@ if(updaterecord != undefined || updaterecord != null) {
 }
 async function uploadFile() {
   id = document.getElementById('idlabel').innerHTML;
+  document.getElementById('upload-button').innerHTML="Uploading..";
+  
  // getUserDetail();
   var pronounce={ 
     "name": username,
@@ -256,6 +253,7 @@ async function uploadFile() {
       if (this.readyState === 4) {
         console.log("Server returned: ", e.target.responseText);
         successmsg.removeAttribute("hidden");
+        document.getElementById('upload-button').innerHTML="Upload";
       }
     };
     var fd = new FormData();
@@ -269,4 +267,83 @@ async function uploadFile() {
     location.reload();
   }
 
+  function submitclick() {
+    event.stopImmediatePropagation();
+    filename = new Date().toISOString()+".wav";
+    var fname=document.getElementById('name');
+  var uCountry=document.getElementById('country');
+  var uLanguage=document.getElementById('language');
+  var uGender=document.getElementById('gender');
+  var successmsg=document.getElementById('successmsg');
+  document.getElementById('submitbtn').innerHTML="Submitting.."
+  failuremsg.setAttribute("hidden","hidden");
+  successmsg.setAttribute("hidden","hidden");
+
+
+   var pronounce={ 
+     "name": fname.value,
+      "gender": uGender.value,
+      "language": uLanguage.value,
+      "country": uCountry.value};
+   var xhr = new XMLHttpRequest();
+   xhr.onload = function (e) {
+     console.log(e)
+     if (this.readyState === 4 && this.status===200) {
+       console.log("Server returned: ", e.target.responseText);
+       successmsg.removeAttribute("hidden");
+       document.getElementById('submitbtn').innerHTML="Submit";
+     }
+     else{
+      failuremsg.removeAttribute("hidden");
+      document.getElementById('submitbtn').innerHTML="Submit";
+     }
+   };
+   var fd = new FormData();
+   fd.append("file", submitblob, filename);
+   console.log(filename);
+   fd.append("pronounce",JSON.stringify(pronounce));
+   xhr.open("POST", "https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/upload", true);
+   xhr.send(fd);
+ }
+
+
+ function updatesubmitclick() {
+  event.stopImmediatePropagation();
+  filename = new Date().toISOString()+".wav";
+//   var fname=document.getElementById('name');
+// var uCountry=document.getElementById('country');
+// var uLanguage=document.getElementById('language');
+// var uGender=document.getElementById('gender');
+var successmsg=document.getElementById('successmsg');
+id = document.getElementById('idlabel').innerHTML;
+document.getElementById('updaterecord').innerHTML="Submitting.."
+failuremsg.setAttribute("hidden","hidden");
+successmsg.setAttribute("hidden","hidden");
+
+ var pronounce={ 
+  "name": username,
+  "gender": usergender,
+  "language": userlanguage,
+  "country": "usercountry",
+   "id": id};
+ var xhr = new XMLHttpRequest();
+ xhr.onload = function (e) {
+   console.log(e)
+   if (this.readyState === 4 && this.status===200) {
+     console.log("Server returned: ", e.target.responseText);
+     successmsg.removeAttribute("hidden");
+     document.getElementById('updaterecord').innerHTML="Submit";s
+   }
+   else{
+    failuremsg.removeAttribute("hidden");
+    document.getElementById('updaterecord').innerHTML="Submit";
+   }
+ };
+ var fd = new FormData();
+ fd.append("file", submitblob, filename);
+ console.log(filename);
+ fd.append("pronounce",JSON.stringify(pronounce));
+ xhr.open("POST", "https://namepronounce-dot-main-crow-349906.uc.r.appspot.com/api/upload", true);
+ xhr.send(fd);
+}
 

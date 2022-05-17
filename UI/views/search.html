@@ -9,7 +9,7 @@
     <div class="wellsvoice">
         <div class="allfeature">
             <div class="linktag">
-                <a href="javascript:history.back()">Go back</a>
+                <a href="javascript:history.go(-1)">Go back</a>
             </div>
             <div class="features">
                 <h2 class="labeclass">Search Pronunciation </h2>
@@ -65,11 +65,14 @@
                 <audio id="searchaudiotag" controls="" src=""></audio><br><br>
                 <div id="transcript_output">
                     <img id="thumbsup" class="transcript_word" src="../images/thumpsUp.jpg"
-                        onclick="countthumbsup()"></span>
+                        onclick="countthumbsup()">
                     <label class="phonemeinputlabel" for="lname">Correct Pronunciation</label>
                     <img id="thumbsdown" class="transcript_word" onclick="countthumbsdown()"
-                        src="../images/thumbsDown.jpg"></span>
-                    <label class="phonemeinputlabel" for="lname">Incorrect Pronunciation</label><br /><br />
+                        src="../images/thumbsDown.jpg">
+                    <label class="phonemeinputlabel" for="lname">Incorrect Pronunciation</label>
+                    <img id="thumbsresponse" class="transcript_word" hidden="true"
+                    src="../images/thumbresponse.png">
+                    <br /><br />
                     <label class="inputlabel labeclass" for="lname">Name:</label>
                     <span id="namespan" class="transcript_word"></span><br>
                     <label class="inputlabel labeclass" for="lname">Phoneme:</label>
